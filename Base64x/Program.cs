@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
+
 namespace Base64x
 {
     static class Program
@@ -33,25 +34,27 @@ namespace Base64x
     }
 
     // manages the actions for the buttons swap and copy
-    public abstract class Button
+    public class Button
     {
-        public virtual string ClickToSwap(string textFromEntryBox)
+        public virtual void ClickToSwap()
         {
-            return "";
         }
 
         public virtual void ClickToCopy()
         {
         }
-    }
 
-    public class SwapButton : Button
-    {
-        public override string ClickToSwap(string textFromEntryBox)
+        public virtual string ClickToConvert(string text)
         {
-            return Converters.EncodeToBase64(textFromEntryBox);
+            return "";
+        }
+
+        public virtual string ClickToRevert(string text)
+        {
+            return "";
         }
     }
+    
 
     public class CopyButton : Button
     {
@@ -59,6 +62,21 @@ namespace Base64x
         {
             
         }
+    }
+    
+    public class EnterButton : Button
+    {
+
+        public override string ClickToConvert(string text)
+        {
+            return Converters.EncodeToBase64(text);
+        }
+
+        public override string ClickToRevert(string text)
+        {
+            return Converters.DecodeToUTF8(text);
+        }
+        
     }
 
     // manages the converters for UTF8 to Base64 back and fourth
@@ -74,7 +92,11 @@ namespace Base64x
 
         public static string DecodeToUTF8(string Base64Text)
         {
-            return "";
+            byte[] textToBeReverted = Convert.FromBase64String(Base64Text);
+            string revertedText = Encoding.UTF8.GetString(textToBeReverted);
+
+            return revertedText;
         }
     }
+    
 }

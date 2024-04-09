@@ -13,6 +13,14 @@ namespace Base64x
 {
     public partial class Form1 : Form
     {
+        public enum State
+        {
+            Encode,
+            Decode,
+        }
+
+        public State _swapState = State.Encode;
+        
         public Form1()
         {
             InitializeComponent();
@@ -27,11 +35,23 @@ namespace Base64x
 
         }
 
+        // changes the process between encoding and decoding the text
         private void button1_Click(object sender, EventArgs e)
         {
-            Button swapButton = new SwapButton();
-            BASE64Out.Text = swapButton.ClickToSwap(UTF8Entry.Text);
-            
+            if (_swapState == State.Encode)
+            {
+                _swapState = State.Decode;
+            }
+            else
+            {
+                _swapState = State.Encode;
+            }
+
+            string BASE64text = BASE64TextBox.Text;
+            string UTF8text = UTF8TextBox.Text;
+
+            BASE64TextBox.Text = UTF8text;
+            UTF8TextBox.Text = BASE64text;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -49,6 +69,20 @@ namespace Base64x
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Button handler = new EnterButton();
+
+            if (_swapState == State.Encode)
+            { 
+                BASE64TextBox.Text = handler.ClickToConvert(UTF8TextBox.Text);
+            }
+            else
+            {
+                BASE64TextBox.Text = handler.ClickToRevert(UTF8TextBox.Text);
+            }
         }
     }
 }
