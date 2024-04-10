@@ -56,7 +56,8 @@ namespace Base64x
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            Button handler = new CopyButton();
+            handler.ClickToCopy(BASE64TextBox.Text);
         }
 
         private void label1_Click(object sender, EventArgs e)

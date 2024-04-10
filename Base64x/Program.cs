@@ -40,7 +40,7 @@ namespace Base64x
         {
         }
 
-        public virtual void ClickToCopy()
+        public virtual void ClickToCopy(string text)
         {
         }
 
@@ -58,9 +58,9 @@ namespace Base64x
 
     public class CopyButton : Button
     {
-        public override void ClickToCopy()
+        public override void ClickToCopy(string text)
         {
-            
+            Clipboard.SetData(DataFormats.Text, text);
         }
     }
     
