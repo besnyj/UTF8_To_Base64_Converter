@@ -22,23 +22,10 @@ namespace Base64x
             Application.Run(new Form1());
         }
     }
-
-    // manages the UTFEntry rich text box
-    public class UTF8
-    {
-    }
-
-    // manages the Base64Out rich text box
-    public class Base64
-    {
-    }
-
+    
     // manages the actions for the buttons swap and copy
     public class Button
     {
-        public virtual void ClickToSwap()
-        {
-        }
 
         public virtual void ClickToCopy(string text)
         {
