@@ -92,18 +92,10 @@ namespace Base64x
 
         public static string DecodeToUTF8(string Base64Text)
         {
-            try
-            {
-                byte[] textToBeReverted = Convert.FromBase64String(Base64Text);
-                string revertedText = Encoding.UTF8.GetString(textToBeReverted);
+            byte[] textToBeReverted = Convert.FromBase64String(Base64Text);
+            string revertedText = Encoding.UTF8.GetString(textToBeReverted);
 
-                return revertedText;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            return revertedText;
         }
     }
     

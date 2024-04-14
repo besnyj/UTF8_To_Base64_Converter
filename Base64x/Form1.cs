@@ -68,9 +68,16 @@ namespace Base64x
                 }
                 else
                 {
-                    BASE64TextBox.Text = handler.ClickToRevert(UTF8TextBox.Text);
+                    try
+                    {
+                        BASE64TextBox.Text = handler.ClickToRevert(UTF8TextBox.Text);
+                    }
+                    catch (FormatException wrongFormat)
+                    {
+                        MessageBox.Show("Test", "test",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                
             }
         }
     }
