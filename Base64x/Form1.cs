@@ -26,63 +26,51 @@ namespace Base64x
             InitializeComponent();
         }
 
-        public void UTF8Entry_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void BASE64Out_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         // changes the process between encoding and decoding the text
-        private void button1_Click(object sender, EventArgs e)
+        private void SwapButton_Click(object sender, EventArgs e)
         {
             if (_swapState == State.Encode)
             {
                 _swapState = State.Decode;
+                TopLabel.Text = "BASE64";
+                BottomLabel.Text = "UTF8";
             }
             else
             {
                 _swapState = State.Encode;
+                TopLabel.Text = "UTF8";
+                BottomLabel.Text = "BASE64";
             }
 
             string BASE64text = BASE64TextBox.Text;
             string UTF8text = UTF8TextBox.Text;
+            
 
             BASE64TextBox.Text = UTF8text;
             UTF8TextBox.Text = BASE64text;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CopyButton_Click(object sender, EventArgs e)
         {
             Button handler = new CopyButton();
             handler.ClickToCopy(BASE64TextBox.Text);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void UTF8TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Button handler = new EnterButton();
-
-            if (_swapState == State.Encode)
-            { 
-                BASE64TextBox.Text = handler.ClickToConvert(UTF8TextBox.Text);
-            }
-            else
+            if (e.KeyCode == Keys.Enter)
             {
-                BASE64TextBox.Text = handler.ClickToRevert(UTF8TextBox.Text);
+                Button handler = new EnterButton();
+
+                if (_swapState == State.Encode)
+                { 
+                    BASE64TextBox.Text = handler.ClickToConvert(UTF8TextBox.Text);
+                }
+                else
+                {
+                    BASE64TextBox.Text = handler.ClickToRevert(UTF8TextBox.Text);
+                }
+                
             }
         }
     }
