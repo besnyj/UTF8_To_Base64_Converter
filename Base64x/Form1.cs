@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Base64x;
 
 namespace Base64x
 {
@@ -19,14 +11,13 @@ namespace Base64x
             Decode,
         }
 
-        public State _swapState = State.Encode;
+        private State _swapState = State.Encode;
         
         public Form1()
         {
             InitializeComponent();
         }
-
-        // changes the process between encoding and decoding the text
+        
         private void SwapButton_Click(object sender, EventArgs e)
         {
             if (_swapState == State.Encode)
@@ -42,12 +33,12 @@ namespace Base64x
                 BottomLabel.Text = "BASE64";
             }
 
-            string BASE64text = BASE64TextBox.Text;
-            string UTF8text = UTF8TextBox.Text;
+            string base64Text = BASE64TextBox.Text;
+            string utf8Text = UTF8TextBox.Text;
             
 
-            BASE64TextBox.Text = UTF8text;
-            UTF8TextBox.Text = BASE64text;
+            BASE64TextBox.Text = utf8Text;
+            UTF8TextBox.Text = base64Text;
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
@@ -72,7 +63,7 @@ namespace Base64x
                     {
                         BASE64TextBox.Text = handler.ClickToRevert(UTF8TextBox.Text);
                     }
-                    catch (FormatException wrongFormat)
+                    catch (FormatException)
                     {
                         MessageBox.Show("Invalid BASE64 input", "Invalid Input",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -1,26 +1,43 @@
-Class Button
-    - handles the functions of for the buttons.
-    - contains the virtual methods ClickToCopy(), ClickToConvert(), ClickToRevert().
-    
-Class CopyButton
-    - inherits from the class Button.
-    - handles the functions for the Copy button.
-    - ClickToCopy() -> takes in a string and transfer the data in the BASE64TextBox to the system's clipboard.
-    
-Class EnterButton
-    - inherits from the class Button.
-    - handles the functions for the Enter button.
-        - as the Enter button is not present in the software anymore, it handles the functions for when the "Enter" key
-        is pressed while texting in the UTF8TextBox.
-    - ClickToConvert() -> takes in a string and returns a from UTF8 to BASE64 converted string using EncodeToBase64()
-    method from the Converters class.
-    - ClickToRevert() -> takes in a string and returns a from BASE64 to UTF8 converted string using the DecodeToUTF8()
-    method from the Converters class.
+Classes and its methods:
 
-Class Converters
-    - serves as the container for the conversion methods.
-    - EncodeToBase64() -> takes in a string, uses the Encoding class to transform the text into a byte array. Then,
-    uses the Convert class to store the converted array as a string in a new variable and returns it.
-    - DecodeToUTF8() -> takes in a string, uses the Convert class to transform the text into a byte array. Then, uses
-    the Encoding class to store the converted array as a string in a new variable and returns it.
+    Class Button
+        - handles the functions of for the buttons.
+        - contains the virtual methods ClickToCopy(), ClickToConvert(), ClickToRevert().
+        
+    Class CopyButton
+        - inherits from the class Button.
+        - handles the functions for the Copy button.
+        - ClickToCopy() -> takes in a string and transfer the data in the BASE64TextBox to the system's clipboard.
+        
+    Class EnterButton
+        - inherits from the class Button.
+        - handles the functions for the Enter button.
+            - as the Enter button is not present in the software anymore, it handles the functions for when the "Enter" key
+            is pressed while texting in the UTF8TextBox.
+        - ClickToConvert() -> takes in a string and returns a from UTF8 to BASE64 converted string using EncodeToBase64()
+        method from the Converters class.
+        - ClickToRevert() -> takes in a string and returns a from BASE64 to UTF8 converted string using the DecodeToUTF8()
+        method from the Converters class.
     
+    Class Converters
+        - serves as the container for the conversion methods.
+        - EncodeToBase64() -> takes in a string, uses the Encoding class to transform the text into a byte array. Then,
+        uses the Convert class to store the converted array as a string in a new variable and returns it.
+        - DecodeToUTF8() -> takes in a string, uses the Convert class to transform the text into a byte array. Then, uses
+        the Encoding class to store the converted array as a string in a new variable and returns it.
+    
+    Enum State
+        - enumerates the two different possible states of conversion methods: utf8 to base64 and reverse.
+        The default value is Encode.
+
+Form methods:
+
+    SwapButton_Click() -> handles the swapping option to select between encode and decode. It checks the current state
+    of the _swapState variable and then changes to the contrasting state, also making changes in the design accordingly
+    to the chosen option.
+    
+    CopyButton_Click() -> Copies the text from the bottom text box to the system's clipboard.
+    
+    UTF8TextBox_KeyDown() -> handles the text conversion. When the enter key is pressed, the method calls ClickToConvert()
+    or ClickToRevert() from the EnterButton class. It checks for the _swapState state. Also, handles the error in case 
+    the user inputs a string which length is not a multiple of 4.

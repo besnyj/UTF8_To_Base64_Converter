@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
+
 
 
 namespace Base64x
@@ -61,7 +58,7 @@ namespace Base64x
 
         public override string ClickToRevert(string text)
         {
-            return Converters.DecodeToUTF8(text);
+            return Converters.DecodeToUtf8(text);
         }
         
     }
@@ -69,17 +66,17 @@ namespace Base64x
     // manages the converters for UTF8 to Base64 back and fourth
     public static class Converters
     {
-        public static string EncodeToBase64(string UTF8Text)
+        public static string EncodeToBase64(string utf8Text)
         {
-            byte[] textToBeConverted = Encoding.UTF8.GetBytes(UTF8Text);
+            byte[] textToBeConverted = Encoding.UTF8.GetBytes(utf8Text);
             string convertedText = Convert.ToBase64String(textToBeConverted);
 
             return convertedText;
         }
 
-        public static string DecodeToUTF8(string Base64Text)
+        public static string DecodeToUtf8(string base64Text)
         {
-            byte[] textToBeReverted = Convert.FromBase64String(Base64Text);
+            byte[] textToBeReverted = Convert.FromBase64String(base64Text);
             string revertedText = Encoding.UTF8.GetString(textToBeReverted);
 
             return revertedText;
