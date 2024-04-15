@@ -74,7 +74,7 @@ namespace Base64x
                     }
                     catch (FormatException wrongFormat)
                     {
-                        MessageBox.Show("Test", "test",
+                        MessageBox.Show("Invalid BASE64 input", "Invalid Input",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
